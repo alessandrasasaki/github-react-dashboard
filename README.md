@@ -1,6 +1,15 @@
 # Github React Dashboard
 > This is a Github dashboard made with Nextjs 
 
+## How to run
+```bash
+npm install
+npm run dev
+# or
+yarn
+yarn dev
+```
+
 ## Functional requirements
 
 - [ ] Must have a title
