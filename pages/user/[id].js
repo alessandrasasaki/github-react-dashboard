@@ -58,8 +58,8 @@ export default function Person() {
   }]
 
   return (
-    <div>
-      <User { ...user } />
+    <div className="user-page-content">
+      <User { ...user } className="user-page-card" />
       <ListView Component={ Repository } collection={ repositories }/>
     </div>
   )

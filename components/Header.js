@@ -1,5 +1,7 @@
 export default function Header({ ...attrs }) {
   return (
-    <h1 {...attrs}>Github Dashboard</h1>
+    <div  className="header" {...attrs}>
+      <h1 className="header-title">Github Dashboard</h1>
+    </div>
   )
 }

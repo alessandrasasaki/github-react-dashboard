@@ -1,15 +1,15 @@
 import Link from 'next/link'
 
-export default function User({ id, avatar, fullname, username, description }) {
+export default function User({ id, avatar, fullname, username, description, className=""}) {
   return (
-    <div>
+    <div className={`card-container ${className}`}>
       <Link href="/user/[id]" as={`/user/${id}`}>
-        <div>
-          <img src={ avatar } />
-          <h4> { fullname }</h4>
-          <h6> { username } </h6>
+        <div className="card">
+          <img className="card-image" src={ avatar } />
+          <h4 className="card-fullname"> { fullname }</h4>
+          <h6 className="card-username"> { username } </h6>
           <br/>
-          <p> { description } </p>
+          <p className="card-description"> { description } </p>
         </div>
       </Link>
     </div>
