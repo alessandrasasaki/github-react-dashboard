@@ -6,23 +6,10 @@ import useSWR from 'swr'
 
 
 export default function Index() {
-
   const [searchTerm, setSearchTerm] = useState('')
 
-  const fetcher = (url) => fetch(url)
-    .then(response => response.json())
-    .then((data) => data.items.map(extractUser))
-
-  const { data: users } = useSWR(!!searchTerm ? `https://api.github.com/search/users?q=${searchTerm}` : null, fetcher)
-
-  const extractUser = (item) => (
-    {
-      username: item.login,
-      avatar: item.avatar_url,
-      description: item.bio,
-      fullname: item.name || item.login
-    }
-  )
+  const fetcher = (url) => fetch(url).then(response => response.json())
+  const { data: users } = useSWR(!!searchTerm ? `/api/user?search=${searchTerm}` : null, fetcher)
 
   const memorizedGrid = useMemo(() => <GridView Component={ User } collection={ users }/>, [users]);
 
