@@ -12,48 +12,47 @@ yarn dev
 
 ## Functional requirements
 
-- [ ] Must have a title
-- [ ] Must have a search page
-  - [ ] The search page must have a search bar
-    - [ ] When the search value is updated it should also update the results
-  - [ ] The search page must have a grid to show the search results
-    - [ ] The search results must render a component with photo, name, username and about
-    - [ ] When clicked, must navigate to user profile page
+- [x] Must have a title
+- [x] Must have a search page
+  - [x] The search page must have a search bar
+    - [x] When the search value is updated it should also update the results
+  - [x] The search page must have a grid to show the search results
+    - [x] The search results must render a component with photo, name, username and about
+    - [x] When clicked, must navigate to user profile page
   - [ ] The search page must have a 404 status if have any search
-  - [ ] The empty state of the search page must
-    - [ ] Show the first 10 users from github api 
-    - [ ] or be empty
-- [ ] Must have a user profile page
-  - [ ] The user profile must have a component with photo, name, username and about
-  - [ ] The user profile must have a grid list all the user repositories
-    - [ ] The user repository item must be a component with
-      - [ ] Title
-        - [ ] When clicked must redirect to github repo page
-      - [ ] Languages
-      - [ ] Description
-      - [ ] Stars
+  - [x] The empty state of the search page must be empty
+- [x] Must have a user profile page
+  - [x] The user profile must have a component with photo, name, username and about
+  - [x] The user profile must have a list with all the user repositories
+    - [ ] The user repository item must be a component with:
+      - [x] Title
+        - [x] When clicked must redirect to github repo page
+      - [x] Languages*
+      - [x] Description
+      - [x] Stars
   - [ ] The user profile must have a go back button 
 
+*TODO: remove badge if repo doesnt have language
 
 ## Technical requirements
 
 - Application
-    - [ ] Server-side rendering
-    - [ ] All the requests must be performed by native fetch
-    - [ ] Reusable user card component
-        - [ ] Click listener
+    - [x] Server-side rendering
+    - [x] All the requests must be performed by native fetch
+    - [x] Reusable user card component
+        - [x] Click listener
         
 - Search page
-    - [ ] Debounce at search
-    - [ ] The search query must be encoded
-    - [ ] A grid of user cards
-        - [ ] When clicked, navigate to profile page
+    - [x] Debounce at search
+    - [ ] The search query must be encoded (?)
+    - [x] A grid of user cards
+        - [x] When clicked, navigate to profile page
     - [ ] Handle errors
 
 - Profile page
     - [ ] Handle errors
-    - [ ] Reusable repository card component
-        - [ ] Open new tab when clicked
+    - [x] Reusable repository card component
+        - [x] Open new tab when clicked
 
 
 ## Testing
