@@ -1,12 +1,8 @@
-import { people } from '../../../data'
+import { getUserAndRepos } from "../../../services/UserService";
 
-export default function personHandler({ query: { id } }, res) {
-  const filtered = people.filter((p) => p.id === id)
+export default async function handler({ query: { id } }, res) {
+  const response = await getUserAndRepos(id)
+  const status = !response.user ? 404 : 200;
 
-  // User with id exists
-  if (filtered.length > 0) {
-    res.status(200).json(filtered[0])
-  } else {
-    res.status(404).json({ message: `User with id: ${id} not found.` })
-  }
+  return res.status(status).json(response)
 }
