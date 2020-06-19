@@ -1,72 +1,35 @@
 import SearchInput from '../components/search/SearchInput'
 import User from '../components/user/User'
 import GridView from '../components/list/GridView'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
+import useSWR from 'swr'
+
 
 export default function Index() {
 
-  const users = [{
-    id: '1',
-    fullname: 'Luke Skywalker',
-    username: 'lukesky0283',
-    description: 'I am your father',
-    avatar: 'https://pbs.twimg.com/media/CelkLkkWsAEEvBz.jpg',
-  }, {
-    id: '2',
-    fullname: 'Buke Skywalker',
-    username: 'bukesky0283',
-    description: 'I am not your father',
-    avatar: 'https://pbs.twimg.com/media/CelkLkkWsAEEvBz.jpg',
-  }, {
-    id: '3',
-    fullname: 'Suke Skywalker',
-    username: 'sukesky0283',
-    description: 'Am I your father?',
-    avatar: 'https://pbs.twimg.com/media/CelkLkkWsAEEvBz.jpg',
-  }, {
-    id: '4',
-    fullname: 'Luke Skywalker',
-    username: 'lukesky0283',
-    description: 'I am your father',
-    avatar: 'https://pbs.twimg.com/media/CelkLkkWsAEEvBz.jpg',
-  }, {
-    id: '5',
-    fullname: 'Buke Skywalker',
-    username: 'bukesky0283',
-    description: 'I am not your father',
-    avatar: 'https://pbs.twimg.com/media/CelkLkkWsAEEvBz.jpg',
-  }, {
-    id: '6',
-    fullname: 'Suke Skywalker',
-    username: 'sukesky0283',
-    description: 'Am I your father?',
-    avatar: 'https://pbs.twimg.com/media/CelkLkkWsAEEvBz.jpg',
-  }, {
-    id: '7',
-    fullname: 'Luke Skywalker',
-    username: 'lukesky0283',
-    description: 'I am your father',
-    avatar: 'https://pbs.twimg.com/media/CelkLkkWsAEEvBz.jpg',
-  }, {
-    id: '8',
-    fullname: 'Buke Skywalker',
-    username: 'bukesky0283',
-    description: 'I am not your father',
-    avatar: 'https://pbs.twimg.com/media/CelkLkkWsAEEvBz.jpg',
-  }, {
-    id: '9',
-    fullname: 'Suke Skywalker',
-    username: 'sukesky0283',
-    description: 'Am I your father?',
-    avatar: 'https://pbs.twimg.com/media/CelkLkkWsAEEvBz.jpg',
-  }]
+  const [searchTerm, setSearchTerm] = useState('')
+
+  const fetcher = (url) => fetch(url)
+    .then(response => response.json())
+    .then((data) => data.items.map(extractUser))
+
+  const { data: users } = useSWR(!!searchTerm ? `https://api.github.com/search/users?q=${searchTerm}` : null, fetcher)
+
+  const extractUser = (item) => (
+    {
+      username: item.login,
+      avatar: item.avatar_url,
+      description: item.bio,
+      fullname: item.name || item.login
+    }
+  )
 
   const memorizedGrid = useMemo(() => <GridView Component={ User } collection={ users }/>, [users]);
 
   return (
     <div>
       <SearchInput
-        onSearchUpdate={(value) => console.log(value)}
+        onSearchUpdate={setSearchTerm}
         placeholder="Search"
       />
     { memorizedGrid }

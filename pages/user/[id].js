@@ -17,7 +17,7 @@ const fetcher = async (url) => {
 export default function Person() {
   const { query } = useRouter()
   const { data, error } = useSWR(
-    () => query.id && `/api/people/${query.id}`,
+    () => query.id && `https://api.github.com//users/${query.id}/repos`,
     fetcher
   )
 

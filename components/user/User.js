@@ -3,7 +3,7 @@ import Link from 'next/link'
 export default function User({ id, avatar, fullname, username, description, className=""}) {
   return (
     <div className={`card-container ${className}`}>
-      <Link href="/user/[id]" as={`/user/${id}`}>
+      <Link href="/user/[id]" as={`/user/${username}`}>
         <div className="card">
           <img className="card-image" src={ avatar } />
           <h4 className="card-fullname"> { fullname }</h4>
