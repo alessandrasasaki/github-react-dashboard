@@ -4,27 +4,17 @@ import ListView from '../../components/list/ListView'
 import Repository from '../../components/user/Repository'
 import User from '../../components/user/User'
 
-const fetcher = async (url) => {
-  const res = await fetch(url)
-  const data = await res.json()
+export default function UserPage() {
+  const { query: { id } } = useRouter()
 
-  if (res.status !== 200) {
-    throw new Error(data.message)
-  }
-  return data
-}
+  const fetcher = (url) => fetch(url).then(response => response.json())
+  const { data } = useSWR(!!id ? `/api/user/${id}` : null, fetcher)
+  const user = !!data ? data.user : null
 
-export default function Person() {
-  const { query } = useRouter()
-  const { data, error } = useSWR(
-    () => query.id && `https://api.github.com//users/${query.id}/repos`,
-    fetcher
-  )
-
-  return (
+  return user && (
     <div className="user-page-content">
       <User { ...user } className="user-page-card" />
-      <ListView Component={ Repository } collection={ repositories }/>
+      <ListView Component={ Repository } collection={ user.repos }/>
     </div>
   )
 }
